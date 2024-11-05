@@ -81,7 +81,7 @@ class LivrosTab extends StatelessWidget {
           itemBuilder: (context, index) {
             Livro livro = livros[index];
             return ListTile(
-              title: Text('Titulo: ${livro.nome}'),
+              title: Text('Título:${livro.nome}'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -90,15 +90,38 @@ class LivrosTab extends StatelessWidget {
                       'Autor: ${livro.autor?.nome} (${livro.autor?.nacionalidade})'),
                 ],
               ),
-              trailing: IconButton(
-                icon: Icon(
-                  livro.favorito ? Icons.favorite : Icons.favorite_border,
-                  color: livro.favorito ? Colors.red : null,
-                ),
-                onPressed: () {
-                  livro.favorito = !livro.favorito;
-                  livro.save();
-                },
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      livro.favorito ? Icons.favorite : Icons.favorite_border,
+                      color: livro.favorito ? Colors.red : null,
+                    ),
+                    onPressed: () {
+                      livro.favorito = !livro.favorito;
+                      livro.save();
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LivroForm(livro: livro),
+                        ),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      // Excluir o livro
+                      box.deleteAt(index);
+                    },
+                  ),
+                ],
               ),
             );
           },

@@ -4,7 +4,9 @@ import '../autores/autor.dart';
 import 'livro.dart';
 
 class LivroForm extends StatefulWidget {
-  const LivroForm({super.key});
+  final Livro? livro; // Parâmetro opcional para editar um livro
+
+  const LivroForm({super.key, this.livro});
 
   @override
   _LivroFormState createState() => _LivroFormState();
@@ -14,12 +16,28 @@ class _LivroFormState extends State<LivroForm> {
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
   double _nota = 1;
-  Autor? _autorSelecionado;
+  Autor? _autorSelecionado; // Autor selecionado
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.livro != null) {
+      _nomeController.text = widget.livro!.nome;
+      _descricaoController.text = widget.livro!.descricao;
+      _nota = widget.livro!.nota;
+      _autorSelecionado = widget.livro!.autor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final autoresBox = Hive.box<Autor>('autores');
+    List<Autor> autores = autoresBox.values.toList();
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Adicionar Novo Livro')),
+      appBar: AppBar(
+          title: Text(
+              widget.livro == null ? 'Adicionar Novo Livro' : 'Editar Livro')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -45,41 +63,50 @@ class _LivroFormState extends State<LivroForm> {
               },
             ),
             DropdownButton<Autor>(
-              hint: const Text('Selecione o Autor'),
+              hint: const Text("Selecione um autor"),
               value: _autorSelecionado,
-              onChanged: (Autor? novoAutor) {
+              onChanged: (Autor? newValue) {
                 setState(() {
-                  _autorSelecionado = novoAutor;
+                  _autorSelecionado = newValue;
                 });
               },
-              items: Hive.box<Autor>('autores')
-                  .values
-                  .map((autor) => DropdownMenuItem<Autor>(
-                        value: autor,
-                        child: Text(autor.nome),
-                      ))
-                  .toList(),
+              items: autores.map((Autor autor) {
+                return DropdownMenuItem<Autor>(
+                  value: autor,
+                  child: Text(autor.nome),
+                );
+              }).toList(),
             ),
-            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                if (_autorSelecionado == null) {
+                if (_autorSelecionado != null) {
+                  if (widget.livro != null) {
+                    // Atualizar o livro existente
+                    widget.livro!.nome = _nomeController.text;
+                    widget.livro!.descricao = _descricaoController.text;
+                    widget.livro!.nota = _nota;
+                    widget.livro!.autor = _autorSelecionado!;
+                    widget.livro!.save(); // Salvar as mudanças
+                  } else {
+                    // Criar um novo livro
+                    final livro = Livro(
+                      nome: _nomeController.text,
+                      descricao: _descricaoController.text,
+                      nota: _nota,
+                      autor: _autorSelecionado!,
+                    );
+
+                    // Salvar no Hive
+                    Hive.box<Livro>('livros').add(livro);
+                  }
+
+                  // Voltar para a tela anterior
+                  Navigator.pop(context);
+                } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Selecione um autor!')),
+                    const SnackBar(content: Text('Selecione um autor')),
                   );
-                  return;
                 }
-
-                final livro = Livro(
-                  nome: _nomeController.text,
-                  descricao: _descricaoController.text,
-                  nota: _nota,
-                  autor: _autorSelecionado,
-                );
-
-                Hive.box<Livro>('livros').add(livro);
-
-                Navigator.pop(context);
               },
               child: const Text('Salvar'),
             ),
