@@ -16,7 +16,7 @@ class _LivroFormState extends State<LivroForm> {
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
   double _nota = 1;
-  Autor? _autorSelecionado; // Autor selecionado
+  Autor? _autorSelecionado;
 
   @override
   void initState() {
@@ -81,14 +81,12 @@ class _LivroFormState extends State<LivroForm> {
               onPressed: () {
                 if (_autorSelecionado != null) {
                   if (widget.livro != null) {
-                    // Atualizar o livro existente
                     widget.livro!.nome = _nomeController.text;
                     widget.livro!.descricao = _descricaoController.text;
                     widget.livro!.nota = _nota;
                     widget.livro!.autor = _autorSelecionado!;
-                    widget.livro!.save(); // Salvar as mudanças
+                    widget.livro!.save();
                   } else {
-                    // Criar um novo livro
                     final livro = Livro(
                       nome: _nomeController.text,
                       descricao: _descricaoController.text,
@@ -96,11 +94,9 @@ class _LivroFormState extends State<LivroForm> {
                       autor: _autorSelecionado!,
                     );
 
-                    // Salvar no Hive
                     Hive.box<Livro>('livros').add(livro);
                   }
 
-                  // Voltar para a tela anterior
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(

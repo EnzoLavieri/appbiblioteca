@@ -117,7 +117,6 @@ class LivrosTab extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () {
-                      // Excluir o livro
                       box.deleteAt(index);
                     },
                   ),
