@@ -4,12 +4,14 @@ import '../autores/autor.dart';
 import 'livro.dart';
 
 class LivroForm extends StatefulWidget {
-  final Livro? livro; // Parâmetro opcional para editar um livro
+  final Livro? livro;
 
   const LivroForm({super.key, this.livro});
 
   @override
+  // ignore: library_private_types_in_public_api - E
   _LivroFormState createState() => _LivroFormState();
+  //A classe estava apresentando um warn, depois ver como arrumar
 }
 
 class _LivroFormState extends State<LivroForm> {

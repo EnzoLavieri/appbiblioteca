@@ -7,7 +7,9 @@ class AutorForm extends StatefulWidget {
   const AutorForm({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AutorFormState createState() => _AutorFormState();
+  //A classe estava apresentando um warn, depois ver como arrumar
 }
 
 class _AutorFormState extends State<AutorForm> {
