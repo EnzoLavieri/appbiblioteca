@@ -1,44 +1,26 @@
 {
   "autores": [
     {
-      "id": "1234",
-      "nome": "reset",
+      "id": "1",
+      "nome": "teste1",
       "nacionalidade": "br"
-    },
-    {
-      "id": "b54cbd6b-c1db-42a8-9f99-57a2c692fbb7",
-      "nome": "TESTE3",
-      "nacionalidade": "TESTE"
     }
   ],
   "livros": [
     {
-      "id": "11edca77-64e9-4499-aaaf-21090f919a0a",
-      "titulo": "TESTE2",
-      "descricao": "TESTE2TESTE2TESTE2",
-      "nota": 20,
-      "autorId": 1234
+      "id": "66e92204-17e3-406d-8086-d1a5318f3913",
+      "titulo": "teste1",
+      "descricao": "teste 1 do id autor",
+      "nota": 10,
+      "autorId": 1,
+      "isFavorito": false
     },
     {
-      "id": "42f21155-6c8c-496f-8e0d-fa2ea666a82c",
-      "titulo": "TESTE2TESTE2TESTE2",
-      "descricao": "TESTE2TESTE2TESTE2TESTE2",
+      "id": "d9b09d45-3df0-4e0c-be4f-11914555dba5",
+      "titulo": "teste2",
+      "descricao": "teste2",
       "nota": 3,
-      "autorId": 0
-    },
-    {
-      "id": "1f2e5bf5-b494-4183-8c92-de92851b64e7",
-      "titulo": "AFASFASFASF",
-      "descricao": "FASFASFASFAF",
-      "nota": 23,
-      "autorId": 0
-    },
-    {
-      "id": "f6e996ee-9b27-4bf1-9fa5-8fd65453787c",
-      "titulo": "TESTE###",
-      "descricao": "TESTE###",
-      "nota": 20,
-      "autorId": 1234,
+      "autorId": 1,
       "isFavorito": false
     }
   ]

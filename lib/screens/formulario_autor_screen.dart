@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import '../models/autores/autor.dart';
 import '../services/api_service.dart';
 
@@ -13,9 +12,9 @@ class FormularioAutorScreen extends StatefulWidget {
 }
 
 class _FormularioAutorScreenState extends State<FormularioAutorScreen> {
+  final _idController = TextEditingController();
   final _nomeController = TextEditingController();
   final _nacionalidadeController = TextEditingController();
-  final _idController = TextEditingController();
 
   final ApiService apiService = ApiService();
 
@@ -23,23 +22,24 @@ class _FormularioAutorScreenState extends State<FormularioAutorScreen> {
   void initState() {
     super.initState();
     if (widget.autor != null) {
+      _idController.text = widget.autor!.id;
       _nomeController.text = widget.autor!.nome;
       _nacionalidadeController.text = widget.autor!.nacionalidade;
-      _idController.text = widget.autor!.id;
     }
   }
 
   void _submitForm() {
+    final id = _idController.text;
     final nome = _nomeController.text;
     final nacionalidade = _nacionalidadeController.text;
-    final id = _idController.text.isEmpty ? Uuid().v4() : _idController.text;
 
-    if (nome.isNotEmpty && nacionalidade.isNotEmpty) {
+    if (id.isNotEmpty && nome.isNotEmpty && nacionalidade.isNotEmpty) {
       final autor = Autor(
         id: id,
         nome: nome,
         nacionalidade: nacionalidade,
       );
+
       if (widget.autor == null) {
         apiService.addAutor(autor);
       } else {
@@ -59,13 +59,10 @@ class _FormularioAutorScreenState extends State<FormularioAutorScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            if (widget.autor != null) ...[
-              TextField(
-                controller: _idController,
-                decoration: InputDecoration(labelText: 'ID'),
-                enabled: false,
-              ),
-            ],
+            TextField(
+              controller: _idController,
+              decoration: InputDecoration(labelText: 'ID'),
+            ),
             TextField(
               controller: _nomeController,
               decoration: InputDecoration(labelText: 'Nome'),
