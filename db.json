@@ -13,14 +13,6 @@
   ],
   "livros": [
     {
-      "id": "b3205f57-b535-4319-8d13-a120c4542464",
-      "titulo": "rwq",
-      "descricao": "rwq",
-      "nota": 53,
-      "autorId": 1234,
-      "isFavorito": false
-    },
-    {
       "id": "11edca77-64e9-4499-aaaf-21090f919a0a",
       "titulo": "TESTE2",
       "descricao": "TESTE2TESTE2TESTE2",
@@ -40,6 +32,14 @@
       "descricao": "FASFASFASFAF",
       "nota": 23,
       "autorId": 0
+    },
+    {
+      "id": "f6e996ee-9b27-4bf1-9fa5-8fd65453787c",
+      "titulo": "TESTE###",
+      "descricao": "TESTE###",
+      "nota": 20,
+      "autorId": 1234,
+      "isFavorito": false
     }
   ]
 }

@@ -24,7 +24,6 @@ class _LivrosScreenState extends State<LivrosScreen> {
     setState(() {
       livro.isFavorito = !livro.isFavorito;
     });
-    // Opcional: Atualize o livro no backend
     await apiService.updateLivro(livro);
   }
 
@@ -92,7 +91,14 @@ class _LivrosScreenState extends State<LivrosScreen> {
         return Card(
           child: ListTile(
             title: Text(livro.titulo),
-            subtitle: Text(livro.descricao),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(livro.descricao),
+                Text('Nota: ${livro.nota}'),
+                Text('AutorId: ${livro.autorId}'),
+              ],
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

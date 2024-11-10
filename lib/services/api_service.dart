@@ -63,7 +63,6 @@ class ApiService {
     }
   }
 
-  // Método para deletar o livro
   Future<void> deleteLivro(String livroId) async {
     final response = await http.delete(
       Uri.parse('$baseUrl/livros/$livroId'),
