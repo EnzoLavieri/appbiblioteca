@@ -25,10 +25,10 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
 
     if (titulo.isNotEmpty && descricao.isNotEmpty && autorId > 0) {
       final livro = Livro(
-        id: Uuid().v4(), // Usando UUID
-        titulo: titulo,
-        descricao: descricao,
-        nota: nota,
+          id: Uuid().v4(), // Gerando o ID usando UUID
+          titulo: titulo,
+          descricao: descricao,
+          nota: nota,
         autorId: autorId,
       );
       apiService.addLivro(livro);
