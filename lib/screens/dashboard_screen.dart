@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/formulario_autor_screen.dart';
 import 'livros_screen.dart';
 import 'formulario_livro_screen.dart';
 
@@ -23,6 +24,12 @@ class DashboardScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (_) => FormularioLivroScreen()))),
+            ListTile(
+                title: Text('Adicionar Autor'),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => FormularioAutorScreen()))),
           ],
         ),
       ),

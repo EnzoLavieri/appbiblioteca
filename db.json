@@ -9,6 +9,16 @@
       "id": 2,
       "nome": "Autor 2",
       "nacionalidade": "Americano"
+    },
+    {
+      "id": "2024-11-10 01:59:29.262",
+      "nome": "Teste 1",
+      "nacionalidade": "sla"
+    },
+    {
+      "id": "2024-11-10 02:06:59.650",
+      "nome": "Teste buceta",
+      "nacionalidade": "cu"
     }
   ],
   "livros": [
@@ -27,17 +37,17 @@
       "autorId": 2
     },
     {
-      "id": "2024-11-09 23:04:26.589",
-      "titulo": "1",
-      "descricao": "1",
-      "nota": 1,
-      "autorId": 1
+      "id": "2024-11-10 02:03:54.907",
+      "titulo": "fas",
+      "descricao": "fas",
+      "nota": 2,
+      "autorId": 2
     },
     {
-      "id": "2024-11-09 23:04:57.893",
-      "titulo": "Teste",
-      "descricao": "yuupi ",
-      "nota": 1,
+      "id": "2024-11-10 02:27:37.085",
+      "titulo": "rrr",
+      "descricao": "rrr",
+      "nota": 12,
       "autorId": 2
     }
   ]

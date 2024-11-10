@@ -1,11 +1,22 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../models/autores/autor.dart';
 import '../models/livros/livro.dart';
 
 class ApiService {
   final String baseUrl = 'http://localhost:3000';
+
+  Future<void> addAutor(Autor autor) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/autores'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(autor.toJson()),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Failed to add autor');
+    }
+  }
 
   Future<List<Autor>> fetchAutores() async {
     final response = await http.get(Uri.parse('$baseUrl/autores'));
@@ -15,6 +26,18 @@ class ApiService {
       return data.map((json) => Autor.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load autores');
+    }
+  }
+
+  Future<void> updateAutor(Autor autor) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/${autor.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(autor.toJson()),
+    );
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('Falha ao atualizar autor');
     }
   }
 
