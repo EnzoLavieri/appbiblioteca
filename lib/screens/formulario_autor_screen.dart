@@ -33,9 +33,7 @@ class _FormularioAutorScreenState extends State<FormularioAutorScreen> {
   void _submitForm() {
     final nome = _nomeController.text;
     final nacionalidade = _nacionalidadeController.text;
-    final id = _idController.text.isEmpty
-        ? Uuid().v4() // Gerando o UUID aqui
-        : _idController.text;
+    final id = _idController.text.isEmpty ? Uuid().v4() : _idController.text;
 
     if (nome.isNotEmpty && nacionalidade.isNotEmpty) {
       final autor = Autor(

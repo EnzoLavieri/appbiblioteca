@@ -1,12 +1,12 @@
 {
   "autores": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Autor 1",
       "nacionalidade": "Brasileiro"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Autor 2",
       "nacionalidade": "Americano"
     },
@@ -59,6 +59,13 @@
       "id": "f2e5edb9-3e38-4903-b42a-8c8fa3953195",
       "titulo": "sla",
       "descricao": "fsds",
+      "nota": 2,
+      "autorId": 2
+    },
+    {
+      "id": "d1db3c2b-dea6-4061-ab38-e35053bbed1e",
+      "titulo": "rter",
+      "descricao": "re",
       "nota": 2,
       "autorId": 2
     }
