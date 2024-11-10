@@ -1,27 +1,44 @@
 {
   "autores": [
     {
-      "id": "ad956efb-8197-4ee3-bbb3-0edb1046dd74",
-      "nome": "Enzo",
-      "nacionalidade": "bbr"
+      "id": "1234",
+      "nome": "reset",
+      "nacionalidade": "br"
     },
     {
-      "id": "4387260c-4cf6-4374-bf7e-deb94dba625d",
-      "nome": "Autor Teste",
-      "nacionalidade": "Brasil"
-    },
-    {
-      "id": "27bbcb67-b993-444c-956f-025b4e592040",
-      "nome": "Autor Teste",
-      "nacionalidade": "Brasil"
+      "id": "b54cbd6b-c1db-42a8-9f99-57a2c692fbb7",
+      "nome": "TESTE3",
+      "nacionalidade": "TESTE"
     }
   ],
   "livros": [
     {
-      "id": "c030c82a-80ac-4828-950a-ae656888b0fd",
-      "titulo": "teste",
-      "descricao": "testeteste",
-      "nota": 2,
+      "id": "b3205f57-b535-4319-8d13-a120c4542464",
+      "titulo": "rwq",
+      "descricao": "rwq",
+      "nota": 53,
+      "autorId": 1234,
+      "isFavorito": false
+    },
+    {
+      "id": "11edca77-64e9-4499-aaaf-21090f919a0a",
+      "titulo": "TESTE2",
+      "descricao": "TESTE2TESTE2TESTE2",
+      "nota": 20,
+      "autorId": 1234
+    },
+    {
+      "id": "42f21155-6c8c-496f-8e0d-fa2ea666a82c",
+      "titulo": "TESTE2TESTE2TESTE2",
+      "descricao": "TESTE2TESTE2TESTE2TESTE2",
+      "nota": 3,
+      "autorId": 0
+    },
+    {
+      "id": "1f2e5bf5-b494-4183-8c92-de92851b64e7",
+      "titulo": "AFASFASFASF",
+      "descricao": "FASFASFASFAF",
+      "nota": 23,
       "autorId": 0
     }
   ]

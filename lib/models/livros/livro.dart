@@ -4,6 +4,7 @@ class Livro {
   final String descricao;
   final double nota;
   final int autorId;
+  bool isFavorito; // Nova propriedade
 
   Livro({
     required this.id,
@@ -11,6 +12,7 @@ class Livro {
     required this.descricao,
     required this.nota,
     required this.autorId,
+    this.isFavorito = false, // Valor padrão
   });
 
   factory Livro.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class Livro {
       descricao: json['descricao'],
       nota: json['nota'],
       autorId: json['autorId'],
+      isFavorito: json['isFavorito'] ?? false,
     );
   }
 
@@ -30,6 +33,7 @@ class Livro {
       'descricao': descricao,
       'nota': nota,
       'autorId': autorId,
+      'isFavorito': isFavorito,
     };
   }
 }
