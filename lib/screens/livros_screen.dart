@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/livros/livro.dart';
 import '../services/api_service.dart';
+import 'formulario_livro_screen.dart';
 
 class LivrosScreen extends StatefulWidget {
   const LivrosScreen({super.key});
@@ -16,6 +17,19 @@ class _LivrosScreenState extends State<LivrosScreen> {
   void initState() {
     super.initState();
     livros = ApiService().fetchLivros();
+  }
+
+  // Função para excluir o livro
+  void _deleteLivro(String livroId) async {
+    try {
+      await ApiService().deleteLivro(livroId);
+      setState(() {
+        livros =
+            ApiService().fetchLivros(); // Recarrega a lista após a exclusão
+      });
+    } catch (error) {
+      print('Erro ao excluir livro: $error');
+    }
   }
 
   @override
@@ -45,7 +59,29 @@ class _LivrosScreenState extends State<LivrosScreen> {
                 child: ListTile(
                   title: Text(livro.titulo),
                   subtitle: Text(livro.descricao),
-                  trailing: Text(livro.nota.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  FormularioLivroScreen(livro: livro),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          _deleteLivro(livro.id);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

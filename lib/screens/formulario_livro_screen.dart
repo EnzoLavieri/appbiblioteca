@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import '../models/autores/autor.dart';
 import '../models/livros/livro.dart';
+import '../models/autores/autor.dart';
 import '../services/api_service.dart';
 
 class FormularioLivroScreen extends StatefulWidget {
+  final Livro? livro; // Adicionamos o livro opcional para edição
+
+  FormularioLivroScreen({this.livro});
+
   @override
   _FormularioLivroScreenState createState() => _FormularioLivroScreenState();
 }
@@ -22,6 +26,12 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
   void initState() {
     super.initState();
     _loadAutores();
+    if (widget.livro != null) {
+      _tituloController.text = widget.livro!.titulo;
+      _descricaoController.text = widget.livro!.descricao;
+      _notaController.text = widget.livro!.nota.toString();
+      _selectedAutorId = widget.livro!.autorId;
+    }
   }
 
   Future<void> _loadAutores() async {
@@ -42,13 +52,18 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
 
     if (titulo.isNotEmpty && descricao.isNotEmpty && _selectedAutorId != null) {
       final livro = Livro(
-        id: Uuid().v4(),
+        id: widget.livro?.id ??
+            Uuid().v4(), // Se for edição, mantém o ID existente
         titulo: titulo,
         descricao: descricao,
         nota: nota,
         autorId: _selectedAutorId!,
       );
-      apiService.addLivro(livro);
+      if (widget.livro == null) {
+        apiService.addLivro(livro);
+      } else {
+        apiService.updateLivro(livro);
+      }
       Navigator.pop(context);
     }
   }
@@ -56,7 +71,9 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Adicionar Livro')),
+      appBar: AppBar(
+          title:
+              Text(widget.livro == null ? 'Adicionar Livro' : 'Editar Livro')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -89,7 +106,9 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submitForm,
-              child: Text('Adicionar Livro'),
+              child: Text(widget.livro == null
+                  ? 'Adicionar Livro'
+                  : 'Salvar Alterações'),
             ),
           ],
         ),

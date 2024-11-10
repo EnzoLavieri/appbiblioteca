@@ -26,48 +26,5 @@
       "nacionalidade": "br"
     }
   ],
-  "livros": [
-    {
-      "id": "1",
-      "titulo": "Livro A",
-      "descricao": "Descrição do livro A",
-      "nota": 4.5,
-      "autorId": 1
-    },
-    {
-      "id": "2",
-      "titulo": "Livro B",
-      "descricao": "Descrição do livro B",
-      "nota": 4,
-      "autorId": 2
-    },
-    {
-      "id": "2024-11-10 02:03:54.907",
-      "titulo": "fas",
-      "descricao": "fas",
-      "nota": 2,
-      "autorId": 2
-    },
-    {
-      "id": "2024-11-10 02:27:37.085",
-      "titulo": "rrr",
-      "descricao": "rrr",
-      "nota": 12,
-      "autorId": 2
-    },
-    {
-      "id": "f2e5edb9-3e38-4903-b42a-8c8fa3953195",
-      "titulo": "sla",
-      "descricao": "fsds",
-      "nota": 2,
-      "autorId": 2
-    },
-    {
-      "id": "d1db3c2b-dea6-4061-ab38-e35053bbed1e",
-      "titulo": "rter",
-      "descricao": "re",
-      "nota": 2,
-      "autorId": 2
-    }
-  ]
+  "livros": []
 }

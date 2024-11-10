@@ -35,8 +35,7 @@ class ApiService {
       headers: {'Content-Type': 'application/json'},
       body: json.encode(autor.toJson()),
     );
-    if (response.statusCode == 200) {
-    } else {
+    if (response.statusCode != 200) {
       throw Exception('Falha ao atualizar autor');
     }
   }
@@ -61,6 +60,29 @@ class ApiService {
 
     if (response.statusCode != 201) {
       throw Exception('Failed to add livro');
+    }
+  }
+
+  // Método para deletar o livro
+  Future<void> deleteLivro(String livroId) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/livros/$livroId'),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete livro');
+    }
+  }
+
+  Future<void> updateLivro(Livro livro) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/livros/${livro.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(livro.toJson()),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Falha ao atualizar livro');
     }
   }
 }
