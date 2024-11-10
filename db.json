@@ -19,6 +19,11 @@
       "id": "2024-11-10 02:06:59.650",
       "nome": "Teste buceta",
       "nacionalidade": "cu"
+    },
+    {
+      "id": "f7a82853-514e-47a5-8cb2-2270325a42a1",
+      "nome": "calinho da putaria",
+      "nacionalidade": "br"
     }
   ],
   "livros": [
@@ -48,6 +53,13 @@
       "titulo": "rrr",
       "descricao": "rrr",
       "nota": 12,
+      "autorId": 2
+    },
+    {
+      "id": "f2e5edb9-3e38-4903-b42a-8c8fa3953195",
+      "titulo": "sla",
+      "descricao": "fsds",
+      "nota": 2,
       "autorId": 2
     }
   ]

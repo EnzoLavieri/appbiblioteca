@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import '../models/livros/livro.dart';
 import '../services/api_service.dart';
 
@@ -24,7 +25,7 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
 
     if (titulo.isNotEmpty && descricao.isNotEmpty && autorId > 0) {
       final livro = Livro(
-        id: DateTime.now().toString(),
+        id: Uuid().v4(), // Usando UUID
         titulo: titulo,
         descricao: descricao,
         nota: nota,

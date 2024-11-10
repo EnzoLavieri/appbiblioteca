@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/autores/autor.dart';
 import '../services/api_service.dart';
@@ -33,7 +34,7 @@ class _FormularioAutorScreenState extends State<FormularioAutorScreen> {
     final nome = _nomeController.text;
     final nacionalidade = _nacionalidadeController.text;
     final id = _idController.text.isEmpty
-        ? DateTime.now().toString()
+        ? Uuid().v4() // Gerando o UUID aqui
         : _idController.text;
 
     if (nome.isNotEmpty && nacionalidade.isNotEmpty) {
