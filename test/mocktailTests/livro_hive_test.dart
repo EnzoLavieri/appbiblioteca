@@ -1,50 +1,33 @@
-// import 'package:flutter_application_1/models/autores/autor.dart';
-// import 'package:flutter_application_1/models/livros/livro.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mocktail/mocktail.dart';
-// import 'package:hive/hive.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:flutter_application_1/models/autores/autor.dart';
+import 'package:flutter_application_1/services/api_service.dart';
 
-// class MockBox<T> extends Mock implements Box<T> {}
+class MockApiService extends Mock implements ApiService {}
 
-// void main() {
-//   late Box<Livro> mockLivroBox;
-//   late Autor autorExemplo;
+void main() {
+  group('Teste de criação de autor', () {
+    late ApiService mockApiService;
 
-//   setUp(() {
-//     mockLivroBox = MockBox<Livro>();
-//     autorExemplo = Autor(nome: 'Autor Exemplo', nacionalidade: 'Brasileiro');
-//   });
+    setUp(() {
+      mockApiService = MockApiService();
+    });
 
-//   test('Deve salvar um novo livro na box', () async {
-//     final livro = Livro(
-//       nome: 'Novo Livro',
-//       descricao: 'Descrição do Livro',
-//       nota: 4.5,
-//       favorito: true,
-//       autor: autorExemplo,
-//     );
+    test('Testa a criação de um autor', () async {
+      final autor = Autor(
+        id: '670aef08-1fcd-4ead-989c-ff7b7f384c56',
+        nome: 'J.K. Rowling',
+        nacionalidade: 'Britânica',
+      );
 
-//     when(() => mockLivroBox.add(livro)).thenAnswer((_) async => 1);
+      when(() => mockApiService.addAutor(autor)).thenAnswer((_) async {});
 
-//     await mockLivroBox.add(livro);
+      await mockApiService.addAutor(autor);
 
-//     verify(() => mockLivroBox.add(livro)).called(1);
-//   });
+      verify(() => mockApiService.addAutor(autor)).called(1);
 
-//   test('Deve atualizar um livro existente', () async {
-//     final livro = Livro(
-//       nome: 'Livro Atualizado',
-//       descricao: 'Descrição Atualizada',
-//       nota: 4.0,
-//       favorito: false,
-//       autor: autorExemplo,
-//     );
-
-//     when(() => mockLivroBox.put(1, livro))
-//         .thenAnswer((_) async => Future.value());
-
-//     await mockLivroBox.put(1, livro);
-
-//     verify(() => mockLivroBox.put(1, livro)).called(1);
-//   });
-// }
+      expect(autor.nome, 'J.K. Rowling');
+      expect(autor.nacionalidade, 'Britânica');
+    });
+  });
+}

@@ -4,6 +4,16 @@
       "id": "ad956efb-8197-4ee3-bbb3-0edb1046dd74",
       "nome": "Enzo",
       "nacionalidade": "bbr"
+    },
+    {
+      "id": "4387260c-4cf6-4374-bf7e-deb94dba625d",
+      "nome": "Autor Teste",
+      "nacionalidade": "Brasil"
+    },
+    {
+      "id": "27bbcb67-b993-444c-956f-025b4e592040",
+      "nome": "Autor Teste",
+      "nacionalidade": "Brasil"
     }
   ],
   "livros": [

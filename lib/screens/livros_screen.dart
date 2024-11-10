@@ -19,13 +19,11 @@ class _LivrosScreenState extends State<LivrosScreen> {
     livros = ApiService().fetchLivros();
   }
 
-  // Função para excluir o livro
   void _deleteLivro(String livroId) async {
     try {
       await ApiService().deleteLivro(livroId);
       setState(() {
-        livros =
-            ApiService().fetchLivros(); // Recarrega a lista após a exclusão
+        livros = ApiService().fetchLivros();
       });
     } catch (error) {
       print('Erro ao excluir livro: $error');

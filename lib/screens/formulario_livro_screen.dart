@@ -5,7 +5,7 @@ import '../models/autores/autor.dart';
 import '../services/api_service.dart';
 
 class FormularioLivroScreen extends StatefulWidget {
-  final Livro? livro; // Adicionamos o livro opcional para edição
+  final Livro? livro;
 
   FormularioLivroScreen({this.livro});
 
@@ -52,8 +52,7 @@ class _FormularioLivroScreenState extends State<FormularioLivroScreen> {
 
     if (titulo.isNotEmpty && descricao.isNotEmpty && _selectedAutorId != null) {
       final livro = Livro(
-        id: widget.livro?.id ??
-            Uuid().v4(), // Se for edição, mantém o ID existente
+        id: widget.livro?.id ?? Uuid().v4(),
         titulo: titulo,
         descricao: descricao,
         nota: nota,
