@@ -1,0 +1,44 @@
+{
+  "autores": [
+    {
+      "id": 1,
+      "nome": "Autor 1",
+      "nacionalidade": "Brasileiro"
+    },
+    {
+      "id": 2,
+      "nome": "Autor 2",
+      "nacionalidade": "Americano"
+    }
+  ],
+  "livros": [
+    {
+      "id": "1",
+      "titulo": "Livro A",
+      "descricao": "Descrição do livro A",
+      "nota": 4.5,
+      "autorId": 1
+    },
+    {
+      "id": "2",
+      "titulo": "Livro B",
+      "descricao": "Descrição do livro B",
+      "nota": 4,
+      "autorId": 2
+    },
+    {
+      "id": "2024-11-09 23:04:26.589",
+      "titulo": "1",
+      "descricao": "1",
+      "nota": 1,
+      "autorId": 1
+    },
+    {
+      "id": "2024-11-09 23:04:57.893",
+      "titulo": "Teste",
+      "descricao": "yuupi ",
+      "nota": 1,
+      "autorId": 2
+    }
+  ]
+}

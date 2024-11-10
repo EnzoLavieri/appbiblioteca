@@ -1,30 +1,35 @@
-import 'package:hive/hive.dart';
-import '../autores/autor.dart';
-
-part 'livro.g.dart';
-
-@HiveType(typeId: 0)
-class Livro extends HiveObject {
-  @HiveField(0)
-  String nome;
-
-  @HiveField(1)
-  String descricao;
-
-  @HiveField(2)
-  double nota;
-
-  @HiveField(3)
-  bool favorito;
-
-  @HiveField(4)
-  Autor? autor;
+class Livro {
+  final String id;
+  final String titulo;
+  final String descricao;
+  final double nota;
+  final int autorId;
 
   Livro({
-    required this.nome,
+    required this.id,
+    required this.titulo,
     required this.descricao,
     required this.nota,
-    this.favorito = false,
-    this.autor,
+    required this.autorId,
   });
+
+  factory Livro.fromJson(Map<String, dynamic> json) {
+    return Livro(
+      id: json['id'],
+      titulo: json['titulo'],
+      descricao: json['descricao'],
+      nota: json['nota'],
+      autorId: json['autorId'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'titulo': titulo,
+      'descricao': descricao,
+      'nota': nota,
+      'autorId': autorId,
+    };
+  }
 }

@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'models/livros/livro.dart';
-import 'home_page.dart';
-import 'models/autores/autor.dart';
+import 'screens/dashboard_screen.dart';
 
-void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(LivroAdapter());
-  Hive.registerAdapter(AutorAdapter());
-  await Hive.openBox<Livro>('livros');
-  await Hive.openBox<Autor>('autores');
-  runApp(const MyApp());
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: DashboardScreen(),
     );
   }
 }

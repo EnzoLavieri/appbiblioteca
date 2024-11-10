@@ -1,14 +1,23 @@
-import 'package:hive/hive.dart';
+class Autor {
+  final String id;
+  final String nome;
+  final String nacionalidade;
 
-part 'autor.g.dart';
+  Autor({required this.id, required this.nome, required this.nacionalidade});
 
-@HiveType(typeId: 1)
-class Autor extends HiveObject {
-  @HiveField(0)
-  String nome;
+  factory Autor.fromJson(Map<String, dynamic> json) {
+    return Autor(
+      id: json['id'],
+      nome: json['nome'],
+      nacionalidade: json['nacionalidade'],
+    );
+  }
 
-  @HiveField(1)
-  String nacionalidade;
-
-  Autor({required this.nome, required this.nacionalidade});
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nome': nome,
+      'nacionalidade': nacionalidade,
+    };
+  }
 }
