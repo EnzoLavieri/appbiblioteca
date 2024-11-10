@@ -1,30 +1,18 @@
 {
   "autores": [
     {
-      "id": "1",
-      "nome": "Autor 1",
-      "nacionalidade": "Brasileiro"
-    },
-    {
-      "id": "2",
-      "nome": "Autor 2",
-      "nacionalidade": "Americano"
-    },
-    {
-      "id": "2024-11-10 01:59:29.262",
-      "nome": "Teste 1",
-      "nacionalidade": "sla"
-    },
-    {
-      "id": "2024-11-10 02:06:59.650",
-      "nome": "Teste buceta",
-      "nacionalidade": "cu"
-    },
-    {
-      "id": "f7a82853-514e-47a5-8cb2-2270325a42a1",
-      "nome": "calinho da putaria",
-      "nacionalidade": "br"
+      "id": "ad956efb-8197-4ee3-bbb3-0edb1046dd74",
+      "nome": "Enzo",
+      "nacionalidade": "bbr"
     }
   ],
-  "livros": []
+  "livros": [
+    {
+      "id": "c030c82a-80ac-4828-950a-ae656888b0fd",
+      "titulo": "teste",
+      "descricao": "testeteste",
+      "nota": 2,
+      "autorId": 0
+    }
+  ]
 }
