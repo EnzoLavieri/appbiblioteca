@@ -2,47 +2,14 @@
   "autores": [
     {
       "id": "1",
-      "nome": "teste1",
-      "nacionalidade": "br"
+      "nome": "Jukera",
+      "nacionalidade": "Anieligina"
     },
     {
-      "id": "3",
-      "nome": "Teste3",
-      "nacionalidade": "italy"
+      "id": "2",
+      "nome": "Fallen",
+      "nacionalidade": "Brazil"
     }
   ],
-  "livros": [
-    {
-      "id": "66e92204-17e3-406d-8086-d1a5318f3913",
-      "titulo": "teste1",
-      "descricao": "teste 1 do id autor",
-      "nota": 10,
-      "autorId": 1,
-      "isFavorito": false
-    },
-    {
-      "id": "d9b09d45-3df0-4e0c-be4f-11914555dba5",
-      "titulo": "teste2",
-      "descricao": "teste2",
-      "nota": 3,
-      "autorId": 1,
-      "isFavorito": false
-    },
-    {
-      "id": "dec2525d-1f88-43bb-a093-c53f02e5b8b3",
-      "titulo": "dasd",
-      "descricao": "adas",
-      "nota": 2,
-      "autorId": 1,
-      "isFavorito": false
-    },
-    {
-      "id": "98a18eb3-9317-4b11-bc4e-263b4a005862",
-      "titulo": "teste3",
-      "descricao": "descricao dessa porra",
-      "nota": 9,
-      "autorId": 3,
-      "isFavorito": false
-    }
-  ]
+  "livros": []
 }

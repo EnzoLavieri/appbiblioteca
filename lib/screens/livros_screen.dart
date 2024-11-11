@@ -11,24 +11,35 @@ class LivrosScreen extends StatefulWidget {
   _LivrosScreenState createState() => _LivrosScreenState();
 }
 
-class _LivrosScreenState extends State<LivrosScreen> {
+class _LivrosScreenState extends State<LivrosScreen>
+    with SingleTickerProviderStateMixin {
   List<Autor> autores = [];
-
   Future<List<Livro>>? livros;
+  final ApiService apiService = ApiService();
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
     _loadLivrosAndAutores();
+  }
+
+  void _toggleFavorito(Livro livro) async {
+    setState(() {
+      livro.isFavorito = !livro.isFavorito;
+    });
+    // Opcional: Atualize o livro no backend
+    await apiService.updateLivro(livro);
   }
 
   Future<void> _loadLivrosAndAutores() async {
     try {
-      final fetchedAutores = await ApiService().fetchAutores();
-      final fetchedLivros = ApiService().fetchLivros();
+      final fetchedAutores = await apiService.fetchAutores();
+      final fetchedLivros = apiService.fetchLivros();
       setState(() {
         autores = fetchedAutores;
-        livros = fetchedLivros;
+        livros = Future.value(fetchedLivros);
       });
     } catch (error) {
       print("Erro ao carregar livros ou autores: $error");
@@ -36,6 +47,7 @@ class _LivrosScreenState extends State<LivrosScreen> {
   }
 
   String _getAutorNome(int autorId) {
+    if (autores.isEmpty) return 'Desconhecido';
     final autor = autores.firstWhere(
       (autor) => int.tryParse(autor.id) == autorId,
       orElse: () => Autor(id: '', nome: 'Desconhecido', nacionalidade: ''),
@@ -45,19 +57,32 @@ class _LivrosScreenState extends State<LivrosScreen> {
 
   void _deleteLivro(String livroId) async {
     try {
-      await ApiService().deleteLivro(livroId);
+      await apiService.deleteLivro(livroId);
       setState(() {
-        livros = ApiService().fetchLivros();
+        livros = apiService.fetchLivros();
       });
     } catch (error) {
       print('Erro ao excluir livro: $error');
     }
   }
 
+  List<Livro> _filterFavoritos(List<Livro> livros) {
+    return livros.where((livro) => livro.isFavorito).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Lista de Livros')),
+      appBar: AppBar(
+        title: Text('Lista de Livros'),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(text: 'Todos'),
+            Tab(text: 'Favoritos'),
+          ],
+        ),
+      ),
       body: FutureBuilder<List<Livro>>(
         future: livros,
         builder: (context, snapshot) {
@@ -73,50 +98,69 @@ class _LivrosScreenState extends State<LivrosScreen> {
             return Center(child: Text('Nenhum livro encontrado.'));
           }
 
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final livro = snapshot.data![index];
-              final autorNome = _getAutorNome(livro.autorId);
+          final allLivros = snapshot.data!;
+          final favoritos = _filterFavoritos(allLivros);
 
-              return Card(
-                child: ListTile(
-                  title: Text(livro.titulo),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(livro.descricao),
-                      Text('Nota: ${livro.nota}'),
-                      Text('Autor: $autorNome'),
-                    ],
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  FormularioLivroScreen(livro: livro),
-                            ),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () => _deleteLivro(livro.id),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
+          return TabBarView(
+            controller: _tabController,
+            children: [
+              _buildLivrosList(allLivros),
+              _buildLivrosList(favoritos),
+            ],
           );
         },
       ),
+    );
+  }
+
+  Widget _buildLivrosList(List<Livro> livros) {
+    return ListView.builder(
+      itemCount: livros.length,
+      itemBuilder: (context, index) {
+        final livro = livros[index];
+        final autorNome = _getAutorNome(livro.autorId);
+
+        return Card(
+          child: ListTile(
+            title: Text(livro.titulo),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(livro.descricao),
+                Text('Nota: ${livro.nota}'),
+                Text('Autor: $autorNome'),
+              ],
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    livro.isFavorito ? Icons.favorite : Icons.favorite_border,
+                    color: livro.isFavorito ? Colors.red : null,
+                  ),
+                  onPressed: () => _toggleFavorito(livro),
+                ),
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => FormularioLivroScreen(livro: livro),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () => _deleteLivro(livro.id),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
